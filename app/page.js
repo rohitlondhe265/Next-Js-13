@@ -1,15 +1,17 @@
+import Card from "@/components/Card";
+import Corousel from "@/components/Corousel";
+import PostList from "@/components/PostList";
+
 export default function Home() {
   return (
-    <main className="container mx-auto">
-      <h1 className="text-3xl font-semibold text-primary my-3 text-center">Next 13 and Tailwind Template</h1>
-      <div className="flex gap-3 justify-center">
-      <button className="btn">Button</button>
-      <button className="btn btn-primary">Button</button>
-      <button className="btn btn-secondary">Button</button>
-      <button className="btn btn-accent">Button</button>
-      <button className="btn btn-ghost">Button</button>
-      <button className="btn btn-link">Button</button>
+    <main>
+      <div className="flex flex-wrap justify-center items-center m-2 md:gap-12 mt-3 md:mt-6">
+        <Corousel />
+        <PostList />
       </div>
+
+      <div className="divider"></div>
+      <Card />
     </main>
-  )
+  );
 }
