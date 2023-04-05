@@ -25,7 +25,7 @@ export default async function Header() {
           return (
             <Link
               key={id}
-              href={`/blog/${slug}`}
+              href={`/category/${slug}`}
               className="hover:text-gray-900 capitalize"
             >
               {title}

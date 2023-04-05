@@ -16,7 +16,7 @@ export async function GET(req, { params }) {
 
     try {
         const result = await excuteQuery({
-            query: "SELECT p.*, t.title FROM tag t INNER JOIN post_tag pt ON t.id = pt.tag_id INNER JOIN post p ON pt.post_id = p.id WHERE t.slug = ? ORDER BY p.created_at DESC LIMIT ? OFFSET ?",
+            query: "SELECT p.* FROM tag t INNER JOIN post_tag pt ON t.id = pt.tag_id INNER JOIN post p ON pt.post_id = p.id WHERE t.slug = ? ORDER BY p.created_at DESC LIMIT ? OFFSET ?",
             values: [slug, limit, skip]
         });
         return NextResponse.json({ tag: slug, data: result, page: page + 1, limit, total })

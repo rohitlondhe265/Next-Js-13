@@ -28,7 +28,7 @@ export default async function Footer() {
             return (
               <Link
                 key={id}
-                href={`/blog/${slug}`}
+                href={`/category/${slug}`}
                 className="hover:text-gray-900 capitalize"
               >
                 {title}
@@ -43,7 +43,7 @@ export default async function Footer() {
             return (
               <Link
                 key={id}
-                href={`/blog/${slug}`}
+                href={`/tag/${slug}`}
                 className="hover:text-gray-900 capitalize"
               >
                 {title}

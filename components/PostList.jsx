@@ -2,7 +2,7 @@ import { apiBaseUrl } from "@/lib/constants";
 import Link from "next/link";
 
 export default async function PostList() {
-  const res = await fetch(`${apiBaseUrl}/posts/`, {
+  const res = await fetch(`${apiBaseUrl}/posts/?page=1&limit=3`, {
     next: { revalidate: 30 },
   });
   if (!res.ok) {
@@ -12,10 +12,10 @@ export default async function PostList() {
 
   return (
     <section className="text-gray-600 body-font overflow-hidden md:w-1/3 mt-6 md:mt-0">
-      <h3 className="bg-primary text-xl text-white font-bold text-center py-1 mb-2">
+      <h3 className="bg-primary text-xl text-white font-bold text-center py-1 mb-2 md:mb-4">
         Trending Posts
       </h3>
-      <div className="space-y-3 md:space-y-6 w-full">
+      <div className="space-y-3 w-full">
         {blogs.data.map((blog) => {
           const { id, title, thumbnail, slug, categories, created_at } = blog;
           return (
@@ -25,7 +25,7 @@ export default async function PostList() {
             >
               <div className="w-1/3 aspect-video object-fill">
                 <img
-                  src={`/${thumbnail}`}
+                  src={`/images/${thumbnail}`}
                   className="cursor-pointer rounded-xl"
                 />
               </div>

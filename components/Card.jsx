@@ -29,7 +29,7 @@ export default async function Card() {
           >
             <figure>
               <img
-                src={`/${thumbnail}`}
+                src={`/images/${thumbnail}`}
                 alt="Shoes"
                 className="aspect-video"
               />
