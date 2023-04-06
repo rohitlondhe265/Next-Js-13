@@ -35,7 +35,7 @@ export default async function Page() {
             </tr>
           </thead>
           <tbody>
-            {cats.map((cat, i) => {
+            {cats?.map((cat, i) => {
               const { id, title, meta_title, description, slug } = cat;
               return (
                 <tr key={id}>

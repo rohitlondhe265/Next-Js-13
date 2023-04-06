@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
   }
   const blog = await res.json();
   return {
-    title: blog.meta_title,
+    title: blog?.meta_title,
   };
 }
 
@@ -24,8 +24,6 @@ export default async function Page({ params }) {
     throw new Error("Failed to fetch data");
   }
   const blog = await res.json();
-
-  const { title, content, thumbnail } = blog;
 
   const createMarkup = (content) => {
     return { __html: content };
@@ -40,12 +38,12 @@ export default async function Page({ params }) {
       <main className="flex-1 px-3 lg:px-12 bg-gray-100 space-y-3">
         <img
           className="w-full p-3 lg:p-6 aspect-video"
-          src={`/${thumbnail}`}
+          src={`/${blog?.thumbnail}`}
           alt="poster image"
         />
         <article className="prose max-w-none text-left md:px-12 md:text-lg">
-          <h1>{title}</h1>
-          <main dangerouslySetInnerHTML={createMarkup(content)}></main>
+          <h1>{blog?.title}</h1>
+          <main dangerouslySetInnerHTML={createMarkup(blog?.content)}></main>
         </article>
       </main>
 
@@ -64,7 +62,7 @@ export async function generateStaticParams() {
     throw new Error("Failed to fetch data");
   }
   const blogs = await res.json();
-  return blogs.data.map((blog) => ({
+  return blogs?.data?.map((blog) => ({
     slug: blog.slug,
   }));
 }

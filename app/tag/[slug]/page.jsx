@@ -1,36 +1,23 @@
+"use client"
+
 import { apiBaseUrl } from "@/lib/constants";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export async function generateMetadata({ params }) {
-    const res = await fetch(`${apiBaseUrl}/posts/tags/`, {
-        next: { revalidate: 30 },
-    });
-    if (!res.ok) {
-        throw new Error("Failed to fetch data");
-    }
-    const tags = await res.json();
-    const tag = await tags.find((tag) => {
-        return tag.slug == params.slug;
-    })
+export default function Page({ params }) {
 
-    return {
-        title: tag.meta_title,
-        description: tag.description,
-    };
-}
+    const [blogs, setBlogs] = useState([]);
 
-export default async function Page({ params }) {
-    const res = await fetch(`${apiBaseUrl}/posts/tags/${params.slug}`, {
-        next: { revalidate: 30 },
-    });
-    if (!res.ok) {
-        throw new Error("Failed to fetch data");
-    }
-    const blogs = await res.json();
+    useEffect(() => {
+        fetch(`${apiBaseUrl}/posts/tags/${params.slug}`)
+          .then((data) => data.json())
+          .then((val) => setBlogs(val.data));
+      }, []);
+    
 
     return (
         <section className="flex flex-col md:flex-row flex-wrap gap-6 md:gap-9 items-center justify-center mx-2">
-            {blogs.data.map((blog) => {
+            {blogs?.data?.map((blog) => {
                 const {
                     id,
                     title,
@@ -70,15 +57,3 @@ export default async function Page({ params }) {
     );
 }
 
-export async function generateStaticParams() {
-    const res = await fetch(`${apiBaseUrl}/posts/tags/`, {
-        next: { revalidate: 30 },
-    });
-    if (!res.ok) {
-        throw new Error("Failed to fetch data");
-    }
-    const tags = await res.json();
-    return tags.map((tag) => ({
-        slug: tag.slug,
-    }));
-}

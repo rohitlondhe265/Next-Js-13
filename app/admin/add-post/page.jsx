@@ -256,7 +256,7 @@ export default function page() {
         {/* post checkboxes */}
         <div className="form-control">
           <h3>Select Category</h3>
-          {apiCat.map((cat) => (
+          {apiCat?.map((cat) => (
             <div key={cat.id} className="label cursor-pointer w-1/2">
               <input
                 id={cat.id}
@@ -271,7 +271,7 @@ export default function page() {
         </div>
         <div className="form-control">
           <h3>Select Tags</h3>
-          {apiTag.map((tag) => (
+          {apiTag?.map((tag) => (
             <div key={tag.id} className="label cursor-pointer w-1/2">
               <input
                 id={tag.id}

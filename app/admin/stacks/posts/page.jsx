@@ -24,7 +24,7 @@ export default async function Page() {
           </tr>
         </thead>
         <tbody>
-          {blogs.data.map((post, i) => {
+          {blogs?.data?.map((post, i) => {
             const { id, title, categories, status, created_at, slug } = post;
             return (
               <tr key={id}>
